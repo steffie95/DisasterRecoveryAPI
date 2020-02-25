@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\Auth",
+    "\\Controllers",
+    "\\Models",
+    "\\Properties"
   ],
+  "SelectedNode": "\\bin",
   "PreviewInSolutionExplorer": false
 }

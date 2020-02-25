@@ -7,6 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DisasterRecoveryAPI.Models;
 
+using DatingApp.API.Dtos;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+
 namespace DisasterRecoveryAPI.Controllers
 {
     [Route("api/[controller]")]
