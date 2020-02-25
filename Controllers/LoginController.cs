@@ -9,6 +9,7 @@ using DisasterRecoveryAPI.Models;
 
 namespace DisasterRecoveryAPI.Controllers
 {
+    //test
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
