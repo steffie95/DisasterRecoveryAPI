@@ -1,4 +1,4 @@
-namespace DatingApp.API.Dtos
+namespace DisasterRecoveryAPI.API.Dtos
 {
     public class UserForLoginDto
     {
