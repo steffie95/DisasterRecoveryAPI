@@ -12,7 +12,7 @@ namespace DisasterRecoveryAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class MachinesController : ControllerBase
     {
         private readonly TimecardContext _context;

@@ -12,7 +12,7 @@ namespace DisasterRecoveryAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class JobsController : ControllerBase
     {
         private readonly TimecardContext _context;
@@ -25,7 +25,7 @@ namespace DisasterRecoveryAPI.Controllers
         // GET: api/Jobs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Jobs>>> GetJobs()
-        {
+        {   
             return await _context.Jobs.ToListAsync();
         }
 
