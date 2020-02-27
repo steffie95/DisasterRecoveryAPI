@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,12 +15,12 @@ namespace DisasterRecoveryAPI.Models
         public DbSet<Jobs> Jobs { get; set; }
         public DbSet<Machines> Machines { get; set; }
         public DbSet<Timecard> Timecards { get; set; }
- 
         public DbSet<User> Users { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-HM255OB\SQLEXPRESS;Database=DisasterRecovery;Trusted_Connection=True;");
-         }
+        public DbSet<Jobs_Timecard> Jobs_Timecards { get; set; }
+        public DbSet<Machines_Timecard> Machines_Timecards { get; set; }
+       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+           // optionsBuilder.UseSqlServer(@"Server=DESKTOP-JVF4528\SQLEXPRESS;Database=DisasterRecovery;Trusted_Connection=True;");
+        }*/
     }
 }
