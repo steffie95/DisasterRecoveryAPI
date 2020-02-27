@@ -43,7 +43,7 @@ namespace DisasterRecoveryAPI
             })); */
 
             var connection = Configuration.GetConnectionString("DisasterRecoveryDB");
-            services.AddDbContext<TimecardContext>(options => options.UseSqlServer("DisasterRecoveryDB"));
+            services.AddDbContext<TimecardContext>(options => options.UseSqlServer("connection"));
             services.AddCors();
             services.AddControllers().AddNewtonsoftJson();
 
