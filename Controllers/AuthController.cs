@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DisasterRecoveryAPI.Models;
 
-using DatingApp.API.Dtos;
+using DisasterRecoveryAPI.Helpers;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+
+using DisasterRecoveryAPI.API.Dtos;
 
 namespace DisasterRecoveryAPI.Controllers
 {
@@ -20,6 +22,7 @@ namespace DisasterRecoveryAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
 
@@ -48,6 +51,8 @@ namespace DisasterRecoveryAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
+            //throw new Exception("Computer says no!");
+
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
@@ -57,7 +62,7 @@ namespace DisasterRecoveryAPI.Controllers
             {
             new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
             new Claim(ClaimTypes.Name, userFromRepo.Username)
-        };
+            };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
@@ -74,7 +79,9 @@ namespace DisasterRecoveryAPI.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new {token = tokenHandler.WriteToken(token)});
+            return Ok(new
+            {token = tokenHandler.WriteToken(token)}
+            );
      
         }
 
