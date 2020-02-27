@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 
-using DisasterRecoveryAPI.API.Dtos;
+using DisasterRecoveryAPI.Dtos;
 
 namespace DisasterRecoveryAPI.Controllers
 {
