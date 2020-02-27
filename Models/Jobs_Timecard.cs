@@ -14,6 +14,6 @@ namespace DisasterRecoveryAPI.Models
         public int JobId { get; set; }
         public int TimecardId { get; set; }
         public Jobs Jobs { get; set; }
-        public Timecard Timecard{get;set;}
+        public Timecard Timecard { get; set; }
     }
 }

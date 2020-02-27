@@ -48,6 +48,31 @@ namespace DisasterRecoveryAPI.Migrations
                     b.ToTable("Jobs");
                 });
 
+            modelBuilder.Entity("DisasterRecoveryAPI.Models.Jobs_Timecard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("JobsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimecardId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobsId");
+
+                    b.HasIndex("TimecardId");
+
+                    b.ToTable("Jobs_Timecards");
+                });
+
             modelBuilder.Entity("DisasterRecoveryAPI.Models.Machines", b =>
                 {
                     b.Property<int>("Id")
@@ -67,14 +92,39 @@ namespace DisasterRecoveryAPI.Migrations
                     b.Property<int>("MaxHrPerDay")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TimecardId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Machines");
+                });
+
+            modelBuilder.Entity("DisasterRecoveryAPI.Models.Machines_Timecard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("JobsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MachineId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MachinesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimecardId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("JobsId");
+
+                    b.HasIndex("MachinesId");
+
                     b.HasIndex("TimecardId");
 
-                    b.ToTable("Machines");
+                    b.ToTable("Machines_Timecards");
                 });
 
             modelBuilder.Entity("DisasterRecoveryAPI.Models.Timecard", b =>
@@ -89,6 +139,21 @@ namespace DisasterRecoveryAPI.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SiteCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalJobAmount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalJobHrs")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalMachineAmount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalMachineHrs")
+                        .HasColumnType("int");
 
                     b.Property<bool>("isConfirmed")
                         .HasColumnType("bit");
@@ -125,15 +190,38 @@ namespace DisasterRecoveryAPI.Migrations
             modelBuilder.Entity("DisasterRecoveryAPI.Models.Jobs", b =>
                 {
                     b.HasOne("DisasterRecoveryAPI.Models.Timecard", "Timecard")
-                        .WithMany("Jobs")
+                        .WithMany()
                         .HasForeignKey("TimecardId");
                 });
 
-            modelBuilder.Entity("DisasterRecoveryAPI.Models.Machines", b =>
+            modelBuilder.Entity("DisasterRecoveryAPI.Models.Jobs_Timecard", b =>
                 {
+                    b.HasOne("DisasterRecoveryAPI.Models.Jobs", "Jobs")
+                        .WithMany("Jobs_Timecard")
+                        .HasForeignKey("JobsId");
+
                     b.HasOne("DisasterRecoveryAPI.Models.Timecard", "Timecard")
-                        .WithMany("Machines")
-                        .HasForeignKey("TimecardId");
+                        .WithMany("Jobs_Timecards")
+                        .HasForeignKey("TimecardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DisasterRecoveryAPI.Models.Machines_Timecard", b =>
+                {
+                    b.HasOne("DisasterRecoveryAPI.Models.Jobs", "Jobs")
+                        .WithMany()
+                        .HasForeignKey("JobsId");
+
+                    b.HasOne("DisasterRecoveryAPI.Models.Machines", null)
+                        .WithMany("Machines_Timecards")
+                        .HasForeignKey("MachinesId");
+
+                    b.HasOne("DisasterRecoveryAPI.Models.Timecard", "Timecard")
+                        .WithMany("Machines_Timecards")
+                        .HasForeignKey("TimecardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

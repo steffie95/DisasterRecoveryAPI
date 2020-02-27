@@ -41,6 +41,8 @@ namespace DisasterRecoveryAPI.Controllers
 
             var userToCreate = new User { Username = userForRegisterDto.Username };
 
+            userToCreate.Role = "User";
+
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
             return StatusCode(201);
