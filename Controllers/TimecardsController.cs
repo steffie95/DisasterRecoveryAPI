@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DisasterRecoveryAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DisasterRecoveryAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class TimecardsController : ControllerBase
     {
         private readonly TimecardContext _context;
@@ -22,6 +24,7 @@ namespace DisasterRecoveryAPI.Controllers
 
         // GET: api/Timecards
         [HttpGet]
+        
         public async Task<ActionResult<IEnumerable<Timecard>>> GetTimecards()
         {
             return await _context.Timecards.ToListAsync();
@@ -45,6 +48,7 @@ namespace DisasterRecoveryAPI.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
+
         public async Task<IActionResult> PutTimecard(int id, Timecard timecard)
         {
             if (id != timecard.Id)
@@ -77,6 +81,7 @@ namespace DisasterRecoveryAPI.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
+
         public async Task<ActionResult<Timecard>> PostTimecard(Timecard timecard)
         {
             _context.Timecards.Add(timecard);

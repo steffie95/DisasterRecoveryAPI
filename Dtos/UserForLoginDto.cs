@@ -1,4 +1,4 @@
-namespace DisasterRecoveryAPI.API.Dtos
+namespace DisasterRecoveryAPI.Dtos
 {
     public class UserForLoginDto
     {

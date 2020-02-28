@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DisasterRecoveryAPI.API.Dtos
+namespace DisasterRecoveryAPI.Dtos
 {
     public class UserForRegisterDto
     {

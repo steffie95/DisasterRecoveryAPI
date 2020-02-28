@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 
-using DisasterRecoveryAPI.API.Dtos;
+using DisasterRecoveryAPI.Dtos;
 
 namespace DisasterRecoveryAPI.Controllers
 {
@@ -41,6 +41,8 @@ namespace DisasterRecoveryAPI.Controllers
 
             var userToCreate = new User { Username = userForRegisterDto.Username };
 
+            userToCreate.Role = "User";
+
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
             return StatusCode(201);
@@ -61,7 +63,8 @@ namespace DisasterRecoveryAPI.Controllers
             var claims = new[]
             {
             new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-            new Claim(ClaimTypes.Name, userFromRepo.Username)
+            new Claim(ClaimTypes.Name, userFromRepo.Username),
+            new Claim(ClaimTypes.Role, userFromRepo.Role.ToUpper())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));

@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DisasterRecoveryAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DisasterRecoveryAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class MachinesController : ControllerBase
     {
         private readonly TimecardContext _context;

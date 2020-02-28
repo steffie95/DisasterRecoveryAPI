@@ -8,7 +8,7 @@ namespace DisasterRecoveryAPI.Models
 {
     public class TimecardContext : DbContext
     {
-        public TimecardContext(DbContextOptions<TimecardContext> options):base(options)
+        public TimecardContext(DbContextOptions<TimecardContext> options) : base(options)
         {
 
         }
@@ -18,9 +18,10 @@ namespace DisasterRecoveryAPI.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Jobs_Timecard> Jobs_Timecards { get; set; }
         public DbSet<Machines_Timecard> Machines_Timecards { get; set; }
-       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-           // optionsBuilder.UseSqlServer(@"Server=DESKTOP-JVF4528\SQLEXPRESS;Database=DisasterRecovery;Trusted_Connection=True;");
-        }*/
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         {
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-HM255OB\SQLEXPRESS;Database=DisasterRecovery;Trusted_Connection=True;");
+         }
     }
 }
